@@ -134,7 +134,7 @@ const userPasswordReset = async (req, res) => {
         } else {
             res.status(403).json({
                 success: "failure",
-                message: " Email is not found"
+                message: "Email is not found"
             });
         }
     } catch (err) {

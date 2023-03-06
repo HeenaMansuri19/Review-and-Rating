@@ -28,7 +28,7 @@ const userModelSchema = new mongoose.Schema(
 
         profilePic: {
             type: String,
-            // required: true
+             required: true
         },
 
         userRole: {

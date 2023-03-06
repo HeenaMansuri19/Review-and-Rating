@@ -11,8 +11,8 @@ describe("User Login API", () => {
     describe("POST/api/users", () => {
         it("IT should Return login user details:", (done) => {
             const data = {
-                userEmail: "heenamansuri87961@gmail.com",
-                password: "ZZff@567",
+                userEmail: "cs20.heenamansuri@svceindore.ac.in",
+                password: "AAbc@123",
             };
             chai
                 .request(server)
@@ -30,8 +30,8 @@ describe("User Login API", () => {
 
         it("It should Return Error Message :", (done) => {
             const data = {
-                userEmail: "zzheenamansuri87961@gmail.com",
-                password: "ZZff@567",
+                userEmail: "cs20zz.heenamansuri@svceindore.ac.in",
+                password: "AAbc@123",
             };
             chai
                 .request(server)
@@ -50,8 +50,8 @@ describe("User Login API", () => {
 
         it("It should Return Email or password Error Message:", (done)=>{
             const data ={
-                userEmail:"zzheenamansuri87961@gmail.com",
-                password:"ZZff@567",
+                userEmail: "cs9020.heenamansuri@svceindore.ac.in",
+                password: "AAbc@123000",
             };
             chai
             .request(server)
@@ -73,7 +73,7 @@ describe("User sendEmail API", () => {
     describe("POST/api/users", () => {
         it("IT should Return login user details:", (done) => {
             const data = {
-                userEmail: "heenamansuri87961@gmail.com",
+                userEmail: "cs20.heenamansuri@svceindore.ac.in",
             };
             chai
                 .request(server)
@@ -90,7 +90,7 @@ describe("User sendEmail API", () => {
         })
         it("IT should Return error in sendEmailPass details:", (done) => {
             const data = {
-                userEmail: "88heenamansuri87961@gmail.com",
+                userEmail: "cs20.heenamansuri@svceindore.ac.in00",
             };
             chai
                 .request(server)
@@ -117,7 +117,7 @@ describe("User resetPassword API", () => {
             };
             chai
                 .request(server)
-                .post("/user/passwordReset/63cdf501c06390cadf88be38/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2M2NkZjUwMWMwNjM5MGNhZGY4OGJlMzgiLCJpYXQiOjE2Nzc3NzYzMzIsImV4cCI6MTY3Nzc3NzUzMn0.9YmA7RaoNLIeNxQjFI-8KFhtQxBlkb8zDT1tnaZoy2s")
+                .post("/user/passwordReset/64021ceed8c2198b092bad2b/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NDAyMWNlZWQ4YzIxOThiMDkyYmFkMmIiLCJpYXQiOjE2Nzc4NjA1MTAsImV4cCI6MTY3Nzg2MTcxMH0.y1HblridEjyWVVmCLmNDXTWvC1FCqzoQXe1LbjGC274")
                 .send(data)
                 .end((err, res) => {
                     res.should.have.status(200);
@@ -129,18 +129,35 @@ describe("User resetPassword API", () => {
         })
         it("IT should Return error in resetPassword details:", (done) => {
             const data = {
-                "newPassword":"AAbc@123",
-                "confirmPassword":"44AAbc@123"
+                "newPassword":"AAbnc@123",
+                "confirmPassword":"44A99Abc@123"
             };
             chai
                 .request(server)
-                .post("/user/passwordReset/63cdf501c06390cadf88be38/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2M2NkZjUwMWMwNjM5MGNhZGY4OGJlMzgiLCJpYXQiOjE2Nzc3NzYzMzIsImV4cCI6MTY3Nzc3NzUzMn0.9YmA7RaoNLIeNxQjFI-8KFhtQxBlkb8zDT1tnaZoy2s")
+                .post("/user/passwordReset/64021ceed8c2198b092bad2b/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NDAyMWNlZWQ4YzIxOThiMDkyYmFkMmIiLCJpYXQiOjE2Nzc4NjA1MTAsImV4cCI6MTY3Nzg2MTcxMH0.y1HblridEjyWVVmCLmNDXTWvC1FCqzoQXe1LbjGC274")
                 .send(data)
                 .end((err, res) => {
                     res.should.have.status(403);
                     res.should.be.a("object");
                     res.body.should.have.property("success").eq("failure");
                     res.body.should.have.property("message").eq("Password and confirm password is not match");
+                    done();
+                })
+        })
+        it("IT should Return email is not found in resetPassword details:", (done) => {
+            const data = {
+                "newPassword":"AAbnc@123",
+                "confirmPassword":"44A99Abc@123"
+            };
+            chai
+                .request(server)
+                .post("/user/passwordReset/64021ceed8c2198b092bad2b/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NDAyMWNlZWQ4YzIxOThiMDkyYmFkMmIiLCJpYXQiOjE2Nzc4NjA1MTAsImV4cCI6MTY3Nzg2MTcxMH0.y1HblridEjyWVVmCLmNDXTWvC1FCqzoQXe1LbjGC274")
+                .send(data)
+                .end((err, res) => {
+                    res.should.have.status(403);
+                    res.should.be.a("object");
+                    res.body.should.have.property("success").eq("failure");
+                    res.body.should.have.property("message").eq("Email is not found");
                     done();
                 })
         })
